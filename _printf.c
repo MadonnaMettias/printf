@@ -21,11 +21,12 @@ int _printf(const char *format, ...)
 				buffer[count] = va_arg(args, int);
 				count++;
 			}
-			else if (format[i + 1] == 's')
-			{
-				buffer[count] = va_arg(args, char *);
-				count++;
-			}
+			/**
+			 *else if (format[i + 1] == 's')
+			*{
+				*buffer[count] = va_arg(args, char *);
+				*count++;
+			}*/
 			else if (format[i + 1] == '%')
 			{
 				buffer[count] = '%';
