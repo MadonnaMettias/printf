@@ -1,44 +1,70 @@
 #include "main.h"
 
 /**
-*_printf -  a function that produces output according to a format
-*@format: a string
-*Return: the number of charachres printed excluding the NULL byte.
-*/
+ * _putchar - writes a character to stdout
+ * @c: the character to print
+ *
+ * Return: 1 on success, -1 on error
+ */
+int _putchar(char c)
+{
+	return (write(STDOUT_FILENO, &c, 1));
+}
+
+/**
+ * _printf - prints output according to a format
+ * @format: the format string
+ *
+ * Return: the number of characters printed (excluding the null byte)
+ */
 int _printf(const char *format, ...)
 {
 	va_list args;
-	int i, count = 0;
-	char *buffer = malloc(sizeof(char) * 100);
+
+	int count = 0;
 
 	va_start(args, format);
-	for (i = 0; format[i] != '\0'; i++)
+	while (*format)
 	{
-		if (format[i] == '%')
+		if (*format == '%')
 		{
-			if (format[i + 1] == 'c')
+			format++;
+			if (*format == 'c')
 			{
-				buffer[count] = va_arg(args, int);
+				char c = (char) va_arg(args, int);
+				_putchar(c);
 				count++;
 			}
-			/**
-			 *else if (format[i + 1] == 's')
-			*{
-				*buffer[count] = va_arg(args, char *);
-				*count++;
-			}*/
-			else if (format[i + 1] == '%')
+			else if (*format == 's')
 			{
-				buffer[count] = '%';
+				char *s = va_arg(args, char *);
+				while (*s)
+				{
+					_putchar(*s);
+					count++;
+					s++;
+				}
+			}
+			else if (*format == '%')
+			{
+				_putchar('%');
 				count++;
 			}
+			else
+			{
+				_putchar('%');
+				_putchar(*format);
+				count += 2;
+			}
+		}
+		else
+		{
+			_putchar(*format);
+			count++;
+		}
+		format++;
 	}
-	else
-	{
-		buffer[count] = format[i];
-		count++;
-	}
-	}
+
 	va_end(args);
 	return (count);
 }
