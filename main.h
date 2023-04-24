@@ -8,6 +8,7 @@
 
 int _putchar(char c);
 int print_num(int n);
+int print_bin(unsigned int n);
 int _printf(const char *format, ...);
 
 #endif

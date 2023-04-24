@@ -71,8 +71,13 @@ int _printf(const char *format, ...)
 					_putchar('-');
 					count++;
 					n = -n;
-				}
+				}	
 				count += print_num(n);
+			}
+			else if (*format == 'b')
+			{
+				unsigned int n = va_arg(args, unsigned int);
+				count += print_bin(n)
 			}
 			else if (*format == '%')
 			{
