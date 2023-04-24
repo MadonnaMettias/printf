@@ -8,6 +8,9 @@
 #include <string.h>
 
 int _strlen(char *s);
+void print_char(va_list args, int *count);
+void print_string(va_list args, int *count);
+void print_percent(__attribute__((unused)) va_list args, int *count);
 int _putchar(char c);
 int print_num(int n);
 int print_bin(unsigned int n);
