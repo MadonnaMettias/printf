@@ -11,6 +11,23 @@ int _putchar(char c)
 	return (write(STDOUT_FILENO, &c, 1));
 }
 
+
+/**
+ *print_num - a function that print an int.
+ *@n: the int to print
+ *Return: the numbers of charachter printed
+ */
+int print_num(int n)
+{
+	int count = 0;
+
+	if (n / 10)
+		count += print_num(n / 10);
+	_putchar((n % 10) + '0');
+	count++;
+	return (count);
+}
+
 /**
  * _printf - prints output according to a format
  * @format: the format string
@@ -44,6 +61,18 @@ int _printf(const char *format, ...)
 					count++;
 					s++;
 				}
+			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				int n = va_arg(args, int);
+
+				if (n < 0)
+				{
+					_putchar('-');
+					count++;
+					n = -n;
+				}
+				count += print_num(n);
 			}
 			else if (*format == '%')
 			{
