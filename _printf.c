@@ -23,22 +23,23 @@ int _printf(const char *format, ...)
 	va_list args;
 
 	va_start(args, format);
-
 	while (*format != '\0')
 	{
 		if (*format == '%')
 		{
-			switch (*++format)
+			switch (*(++format))
 			{
 				case 'c':
 					_putchar(va_arg(args, int));
 					count++;
 					break;
 				case 's':
-					for (str  =va_arg(args, char *); *str != '\0'; str++)
+					for (str = va_arg(args, char *); *str != '\0'; str++)
 					{
-						_putchar(*str);
-						count++;
+					if (str == NULL)
+						str = "(NULL)";
+					_putchar(*str);
+					count++;
 					}
 					break;
 				case '%':
