@@ -28,6 +28,22 @@ int print_num(int n)
 	return (count);
 }
 
+
+/**
+ * print_bin - a function that print an int in binary.
+ * @n: the int to print
+ * Return: the number of char printed
+ */
+int print_bin(unsigned int n)
+{
+	int count = 0;
+
+	if (n / 2)
+		count += print_bin(n / 2);
+	_putchar((n % 2) + '0');
+	count++;
+	return (count);
+}
 /**
  * _printf - prints output according to a format
  * @format: the format string
