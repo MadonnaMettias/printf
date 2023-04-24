@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <string.h>
 
+int _strlen(char *s);
 int _putchar(char c);
 int print_num(int n);
 int print_bin(unsigned int n);

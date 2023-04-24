@@ -1,6 +1,24 @@
 #include "main.h"
 
 /**
+ * _strlen - a function that return the legnth of a string
+ * @s: a string
+ * Return: the legnth of the string
+ */
+int _strlen(char *s)
+{
+	int count = 0;
+
+	while (*s != '\0')
+	{
+		count++;
+		s++;
+	}
+	return (count);
+}
+
+
+/**
  * _printf - a function that prints output according to a format
  * @format: the format string
  * Return: the numbers of char printed without the null byte.
@@ -30,8 +48,8 @@ int _printf(const char *format, ...)
 					{
 						char *s = va_arg(args, char *);
 
-						write(1, s, strlen(s));
-						count += strlen(s);
+						write(1, s, _strlen(s));
+						count += _strlen(s);
 						break;
 					}
 				case '%':
