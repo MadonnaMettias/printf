@@ -1,20 +1,13 @@
 #include "main.h"
 
 /**
- * _strlen - a function that return the legnth of a string
- * @s: a string
- * Return: the legnth of the string
+ * _putchar - a function that prints a single char
+ * @c: the char to print
+ * Return: 0 always success
  */
-int _strlen(char *s)
+int _putchar(char c)
 {
-	int count = 0;
-
-	while (*s != '\0')
-	{
-		count++;
-		s++;
-	}
-	return (count);
+	return (write(1, &c, 1));
 }
 
 
@@ -25,53 +18,41 @@ int _strlen(char *s)
  */
 int _printf(const char *format, ...)
 {
+	char c;
 	int count = 0;
 	va_list args;
 
 	va_start(args, format);
 
-	while (*format)
+	while ((c = *format++) != '\0')
 	{
-		if (*format == '%')
+		if (c == '%')
 		{
 			switch (*++format)
 			{
 				case 'c':
-					{
-						char c = va_arg(args, int);
-
-						write(1, &c, 1);
-						count++;
-						break;
-					}
+					_putchar(va_arg(args, int));
+					count++;
+					break;
 				case 's':
+					for (char *str = va_arg(args, char *); *str != '\0'; str++)
 					{
-						char *s = va_arg(args, char *);
-
-						write(1, s, _strlen(s));
-						count += _strlen(s);
-						break;
-					}
-				case '%':
-					{
-						write(1, "%", 1);
+						_putchar(*str);
 						count++;
-						break;
 					}
-				default:
-					{
-						break;
-					}
+					break;
+				case '%':
+					_putchar('%');
+					count++;
+					break;
 			}
 		}
 		else
 		{
-			write(1, format, 1);
+			_putchar(c);
 			count++;
 		}
-		format++;
 	}
 	va_end(args);
 	return (count);
 }
-
