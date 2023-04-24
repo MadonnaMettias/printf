@@ -18,7 +18,7 @@ int _putchar(char c)
  */
 int _printf(const char *format, ...)
 {
-	char c;
+	char c, *str;
 	int count = 0;
 	va_list args;
 
@@ -35,7 +35,7 @@ int _printf(const char *format, ...)
 					count++;
 					break;
 				case 's':
-					for (char *str = va_arg(args, char *); *str != '\0'; str++)
+					for (str  =va_arg(args, char *); *str != '\0'; str++)
 					{
 						_putchar(*str);
 						count++;
