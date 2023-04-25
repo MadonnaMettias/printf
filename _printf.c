@@ -42,16 +42,35 @@ void print_string(va_list args, int *count)
 	}
 }
 
+
 /**
- * print_percent - print a percent sign.
- * @args: --
- * @count: a pointer to the count of the printed characters
+ * print_num - a function that print integres
+ * @args: a va_list containing the int to be printed
+ * @count: a pointer to the count of the printed characteres
  */
-void print_percent(__attribute__((unused)) va_list args, int *count)
+void print_num(va_list args, int *count)
 {
-	_putchar('%');
-	count += 1;
+	int num, len, i;
+	char buf[10];
+
+	num = va_arg(args, int);
+	len = 0;
+	i = 0;
+
+	while (num)
+	{
+		buf[len++] = num % 10 + '0';
+		num /= 10;
+	}
+	for (i = len - 1; i >= 0; i--)
+	{
+		_putchar(buf[i]);
+		count++;
+	}
 }
+
+
+
 /**
  * _printf - a function that prints output according to a format
  * @format: the format string
@@ -59,7 +78,7 @@ void print_percent(__attribute__((unused)) va_list args, int *count)
  */
 int _printf(const char *format, ...)
 {
-	int count = 0;
+	int num, count = 0;
 	va_list args;
 
 	va_start(args, format);
@@ -75,8 +94,9 @@ int _printf(const char *format, ...)
 				case 's':
 					print_string(args, &count);
 					break;
-				case '%':
-					print_percent(args, &count);
+				case 'd':
+				case 'i':
+					print_num(args, &count);
 					break;
 				default:
 					_putchar('%');
