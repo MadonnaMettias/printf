@@ -65,7 +65,7 @@ void print_num(va_list args, int *count)
 	for (i = len - 1; i >= 0; i--)
 	{
 		_putchar(buf[i]);
-		count++;
+		*count += 1;
 	}
 }
 
@@ -97,6 +97,10 @@ int _printf(const char *format, ...)
 				case 'd':
 				case 'i':
 					print_num(args, &count);
+					break;
+				case '%':
+					_putchar('%');
+					count++;
 					break;
 				default:
 					_putchar('%');
