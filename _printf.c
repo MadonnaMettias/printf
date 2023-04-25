@@ -54,6 +54,13 @@ void print_num(va_list args, int *count)
 	char buf[10];
 
 	num = va_arg(args, int);
+
+	if (num < 0)
+	{
+		_putchar('-');
+		num = -num;
+	}
+
 	len = 0;
 	i = 0;
 
